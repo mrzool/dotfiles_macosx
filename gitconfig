@@ -1,0 +1,23 @@
+[user]
+	email = zool.bib@gmail.com
+	name = zool
+[credential]
+	helper = cache
+[color]
+  ui = true
+[core]
+	excludesfile = ~/.cvsignore
+[push]
+	default = simple
+[merge]
+	tool = vimdiff
+[alias]
+	st = status
+  a  = add
+	cm = commit
+  ps = push
+  pl = pull
+	co = checkout
+	br = branch
+	unstage = reset HEAD --
+	last = log -1 HEAD
