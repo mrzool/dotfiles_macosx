@@ -9,6 +9,7 @@ This repo includes dotfiles for:
 - git
 - vim
 - mr
+- ack
 
 
 Notes
