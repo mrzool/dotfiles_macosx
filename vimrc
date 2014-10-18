@@ -155,9 +155,8 @@ set ssop-=options
 set ssop-=folds      
 
 " Forces *.md as markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+set nofoldenable
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
