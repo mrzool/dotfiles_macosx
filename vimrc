@@ -179,8 +179,8 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-"Makes foo-bar considered one word
-" set iskeyword+=- 
+" Makes foo-bar considered one word
+set iskeyword+=- 
 
 
 """"""""""""""""""""""""""""""
