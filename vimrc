@@ -363,3 +363,6 @@ let g:expand_region_text_objects = {
 
 " Map Goyo
 nnoremap <Leader>g :Goyo<CR>
+
+" Map Gundo
+nnoremap <F5> :GundoToggle<CR>
