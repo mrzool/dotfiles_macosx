@@ -41,14 +41,13 @@ function marks {
 }
 
 # Adds tab completion for jump and unmark functions
-_completemarks() {
-  local curw=${COMP_WORDS[COMP_CWORD]}
-  local wordlist=$(find $MARKPATH -type l -printf "%f\n")
-  COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
-  return 0
-}
-
-complete -F _completemarks jump unmark
+  function _jump {
+      local cur=${COMP_WORDS[COMP_CWORD]}
+      local marks=$(find $MARKPATH -type l | awk -F '/' '{print $NF}')
+      COMPREPLY=($(compgen -W '${marks[@]}' -- "$cur"))
+      return 0
+    }
+complete -o default -o nospace -F _jump jump
 
 # Function for transfer.sh
 transfer() { curl --upload-file $1 https://transfer.sh/$(basename $1); }
