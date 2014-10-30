@@ -11,6 +11,10 @@ alias tounderscore='sh ~/bin/tounderscore.sh'
 #System
 alias poweroff='shutdown -h now'
 
+#Terminal
+alias c='clear'
+alias e='exit'
+
 # Package management
 alias backport='apt-get -t wheezy-backports install'
 alias installed='dpkg --get-selections'
