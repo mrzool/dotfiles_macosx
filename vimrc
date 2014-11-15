@@ -272,11 +272,12 @@ nnoremap <Leader>sp :sp.<CR>
 nnoremap <Leader>tn :tabnew.<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
-" Remap motions to navigate wrapped lines
-noremap  <buffer> <silent> k gk
-noremap  <buffer> <silent> j gj
-noremap  <buffer> <silent> 0 g0
-noremap  <buffer> <silent> $ g$
+" Treat long lines as break lines
+map j gj
+map k gk
+
+" Underline current line
+nnoremap <Leader>u :Underline<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
