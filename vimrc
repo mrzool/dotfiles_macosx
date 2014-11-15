@@ -279,6 +279,8 @@ map k gk
 " Underline current line
 nnoremap <Leader>u :Underline<CR>
 
+" Search and replace selected text
+vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Abbreviations
@@ -324,16 +326,12 @@ let g:ctrlp_cmd = 'CtrlP'
 " Map Gundo
 nnoremap <F5> :GundoToggle<CR>
 
-" Settings for Ack
-
-" When you press gv you Ack after the selected text
-vnoremap <silent> av :call VisualSelection('gv', '')<CR>
-
-" Open Ack and put the cursor in the right position
+" Open Ack superfast
 map <leader>a :Ack 
 
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
+" Ack after the selected text in visual mode
+vnoremap <silent> av :call VisualSelection('gv', '')<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom functions
