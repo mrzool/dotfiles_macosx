@@ -1,3 +1,5 @@
+" Started with base by: Amir Salihefendic <http://amix.dk>
+"
 " Sections:
 "
 "    -> General
@@ -241,7 +243,7 @@ map q: :q
 " make y behave like other capitals
 map Y y$
 
-" maps jj to esc (whoha!)
+" maps jj to esc
 inoremap jj <Esc>
 
 " Quickly save a file/quit
