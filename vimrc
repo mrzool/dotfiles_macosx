@@ -4,17 +4,15 @@
 "
 "    -> General
 "    -> UI
-"    -> Colors and Fonts
-"    -> Files and backups
+"    -> Colors & Fonts
+"    -> Files & backups
 "    -> Text & tabs
-"    -> Visual mode related
-"    -> Moving around, tabs, splits and buffers
+"    -> Visual mode
+"    -> Tabs, splits and buffers
 "    -> Mappings
 "    -> Abbreviations
-"    -> Custom commands
-"    -> Spell checking
+"    -> Helper functions
 "    -> Plugins settings
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -156,9 +154,6 @@ set noswapfile
 set ssop-=options    
 set ssop-=folds      
 
-" Forces *.md as markdown
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
 " Do not fold, ever
 set nofoldenable
 
@@ -185,6 +180,10 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+
+" turns off physical line wrapping
+set textwidth=0 wrapmargin=0
+
 " Makes foo-bar considered one word
 set iskeyword+=- 
 
@@ -199,7 +198,7 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, splits and buffers
+" => Tabs, splits and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
@@ -221,7 +220,7 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" Open new split panes to right and bottom (feels more natural than Vim’s default)
+" Open new split panes to right and bottom
 set splitbelow
 set splitright
 
@@ -237,6 +236,10 @@ map 0 ^
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 map q: :q
 
+" Treat long lines as break lines
+map j gj
+map k gk
+
 " map ctrl-J to insert line break (opposite of J)
 :nnoremap <NL> i<CR><ESC>
 
@@ -249,16 +252,16 @@ inoremap jj <Esc>
 " Quickly save a file/quit
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>qa :qa<CR>
 nnoremap <Leader>wq :wq<CR>
 
 " Go to next occurence while vimgrepping
-nnoremap <leader>n :cn<CR>
-nnoremap <leader>nn :cp<CR>
+" nnoremap <leader>n :cn<CR>
+" nnoremap <leader>nn :cp<CR>
 
 " Copy and paste to system clipboard
 vmap <Leader>y "+y
 vmap <Leader>d "+d
-nmap <Leader>yy "+yy
 nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
@@ -271,10 +274,6 @@ nnoremap <Leader>sp :sp.<CR>
 " Quickly open and close new tab
 nnoremap <Leader>tn :tabnew.<CR>
 nnoremap <Leader>tc :tabclose<CR>
-
-" Treat long lines as break lines
-map j gj
-map k gk
 
 " Underline current line
 nnoremap <Leader>u :Underline<CR>
@@ -301,14 +300,6 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Pressing -ss will toggle and untoggle spell checking
-" map <leader>ss :setlocal spell!<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -326,18 +317,22 @@ let g:ctrlp_cmd = 'CtrlP'
 " Map Gundo
 nnoremap <F5> :GundoToggle<CR>
 
+" Load snipmate HTML scope when opening liquid files
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['liquid'] = 'liquid,html'
+
 " Open Ack superfast
 map <leader>a :Ack 
 
-" Ack after the selected text in visual mode
+" Ack for visually selected text
 vnoremap <silent> av :call VisualSelection('gv', '')<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Custom functions
+" => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Command to underline the current line
 function! s:Underline(chars)
   let chars = empty(a:chars) ? '-' : a:chars
   let nr_columns = virtcol('$') - 1
@@ -346,11 +341,13 @@ function! s:Underline(chars)
 endfunction
 command! -nargs=? Underline call s:Underline(<q-args>)
 
+
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
 endfunction 
+
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
