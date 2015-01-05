@@ -237,8 +237,8 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 map q: :q
 
 " Treat long lines as break lines
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
 " map ctrl-J to insert line break (opposite of J)
 :nnoremap <NL> i<CR><ESC>
